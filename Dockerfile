@@ -9,3 +9,6 @@ RUN pip uninstall -y tensorflow && pip install /tmp/tensorflow-0.5.0-cp27-none-l
 # Add to path
 ENV PATH=/usr/local/cuda/bin:$PATH \
   LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+VOLUME /workspace
+WORKDIR /workspace
