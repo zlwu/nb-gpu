@@ -20,8 +20,8 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN conda create -q -n py2 python=2.7 numpy scipy matplotlib jupyter notebook ipython scikit-learn pandas nose sympy opencv pyyaml h5py theano 
-RUN conda create -q -n py3 python=3.5 numpy scipy matplotlib jupyter notebook ipython scikit-learn pandas nose sympy opencv pyyaml h5py theano 
+RUN conda create -q -n py2 python=2.7 numpy scipy matplotlib jupyter notebook ipython scikit-learn pandas nose sympy opencv pillow pyyaml h5py theano 
+RUN conda create -q -n py3 python=3.5 numpy scipy matplotlib jupyter notebook ipython scikit-learn pandas nose sympy opencv pillow pyyaml h5py theano 
 
 RUN /bin/bash -c "source activate py2 && conda update --all -yq && ipython kernel install --user && pip -q --no-cache-dir install tensorflow-gpu keras && source deactivate"
 RUN /bin/bash -c "source activate py3 && conda update --all -yq && ipython kernel install --user && pip -q --no-cache-dir install tensorflow-gpu keras && source deactivate"
