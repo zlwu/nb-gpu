@@ -1,9 +1,9 @@
-FROM nvidia/cuda:8.0-cudnn5-devel
+FROM nvidia/cuda:8.0-cudnn6-devel
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Install tini
-ENV TINI_VERSION v0.14.0
+ENV TINI_VERSION v0.16.1
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
@@ -23,8 +23,8 @@ ENV PATH /opt/conda/bin:$PATH
 RUN conda create -q -n py2 python=2.7 numpy scipy matplotlib jupyter notebook ipython scikit-learn pandas nose sympy opencv pillow pyyaml h5py theano 
 RUN conda create -q -n py3 python=3.5 numpy scipy matplotlib jupyter notebook ipython scikit-learn pandas nose sympy opencv pillow pyyaml h5py theano 
 
-RUN /bin/bash -c "source activate py2 && conda update --all -yq && ipython kernel install --user && pip -q --no-cache-dir install tensorflow-gpu keras && source deactivate"
-RUN /bin/bash -c "source activate py3 && conda update --all -yq && ipython kernel install --user && pip -q --no-cache-dir install tensorflow-gpu keras && source deactivate"
+RUN /bin/bash -c "source activate py2 && conda update --all -yq && conda install pytorch torchvision cuda80 -c soumith -yq && ipython kernel install --user && pip -q --no-cache-dir install tensorflow-gpu keras && source deactivate"
+RUN /bin/bash -c "source activate py3 && conda update --all -yq && conda install pytorch torchvision cuda80 -c soumith -yq && ipython kernel install --user && pip -q --no-cache-dir install tensorflow-gpu keras && source deactivate"
 
 COPY run_jupyter.sh /
 
